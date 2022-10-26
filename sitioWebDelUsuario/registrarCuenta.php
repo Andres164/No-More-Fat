@@ -1,3 +1,14 @@
+<?php
+if( !empty($_POST) ) {
+  require_once '../dbConnection/Registrar/pasientes.php';
+  $usuario = $_POST;
+  registrarPasiente($usuario);
+  $diaHoy = date('Y-m-d');
+  $fecha_vencimiento =  ( date('Y-m-d', strtotime($diaHoy . ' + 7 days')) );
+  echo '<h2>Paciente registrado, cita registrada, fecha de vencimiento: ' . $fecha_vencimiento . '</h2>';
+}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Appointment</title>
+    <title>Registration</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
@@ -73,17 +84,16 @@
   <main>
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h2>Make an appointment</h2>
-      <p class="lead">Fill the information below to make an appointment.</p>
+      <h2>Register</h2>
+      <p class="lead">Fill the information below to make an account and make an appointment.</p>
     </div>
 
       <div class="container">
-        <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form method="POST" action="registrarCuenta.php" class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input name="nombre" type="text" class="form-control" id="firstName" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
@@ -91,7 +101,7 @@
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <input name="apellidos" type="text" class="form-control" id="lastName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid last name is required.
               </div>
@@ -101,7 +111,7 @@
               <label for="username" class="form-label">Username</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <input name="nombre_usuario" type="text" class="form-control" id="username" placeholder="Username" required>
               <div class="invalid-feedback">
                   Your username is required.
                 </div>
@@ -109,16 +119,24 @@
             </div>
 
             <div class="col-12">
-              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <label for="email" class="form-label">Email</label>
+              <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" required>
               <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                Please enter a valid email address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="contraseña" class="form-label">Password</label>
+              <input name="password" type="password" class="form-control" id="contraseña" placeholder="Password" required>
+              <div class="invalid-feedback">
+                Please enter a password.
               </div>
             </div>
 
             <div class="col-12">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input name="direccion" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -126,9 +144,9 @@
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
+              <select name="estado" class="form-select" id="state" required>
                 <option value="">Choose...</option>
-                <option>California</option>
+                <option>Sinaloa</option>
               </select>
               <div class="invalid-feedback">
                 Please provide a valid state.
@@ -137,7 +155,7 @@
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
+              <input name="codigo_postal" type="text" class="form-control" id="zip" placeholder="" required>
               <div class="invalid-feedback">
                 Zip code required.
               </div>
@@ -145,14 +163,7 @@
           </div>
 
           <hr class="my-4">
-
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
-          </div>
-
-          <hr class="my-4">
-
+<!--
           <h4 class="mb-3">Payment</h4>
 
           <div class="my-3">
@@ -206,8 +217,9 @@
           </div>
 
           <hr class="my-4">
+          -->
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Make appointment</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Register</button>
         </form>
       </div>
     </div>
