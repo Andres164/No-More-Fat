@@ -3,9 +3,11 @@ if( !empty($_POST) ) {
   require_once '../dbConnection/Registrar/pasientes.php';
   $usuario = $_POST;
   registrarPasiente($usuario);
+  /*
   $diaHoy = date('Y-m-d');
   $fecha_vencimiento =  ( date('Y-m-d', strtotime($diaHoy . ' + 7 days')) );
   echo '<h2>Paciente registrado, cita registrada, fecha de vencimiento: ' . $fecha_vencimiento . '</h2>';
+  */
 }
 ?>
 
@@ -79,6 +81,19 @@ if( !empty($_POST) ) {
     <link href="../styles/form-validation.css" rel="stylesheet">
   </head>
   <body class="bg-light">
+
+
+<!-- HEADER -->
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">No more fat</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+</header>
     
 <div class="container">
   <main>
@@ -163,61 +178,6 @@ if( !empty($_POST) ) {
           </div>
 
           <hr class="my-4">
-<!--
-          <h4 class="mb-3">Payment</h4>
-
-          <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">Credit card</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="debit">Debit card</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
-
-          <div class="row gy-3">
-            <div class="col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
-              <small class="text-muted">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
-              <div class="invalid-feedback">
-                Credit card number is required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-              <div class="invalid-feedback">
-                Expiration date required
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-              <div class="invalid-feedback">
-                Security code required
-              </div>
-            </div>
-          </div>
-
-          <hr class="my-4">
-          -->
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Register</button>
         </form>

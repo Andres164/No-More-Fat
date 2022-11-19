@@ -1,32 +1,5 @@
 <?php
-if( !empty($_POST) ) {
-  require_once '../dbConnection/Registrar/recetas_medicas.php';
-  require_once '../dbConnection/UPDATE/citas.php';
-  require_once '../php/extraerId.php';
-  $receta_medica = $_POST;
-  $fechaIncorrecta = str_replace('/', '-', $receta_medica['fecha_final']);
-  $fechaFormateada = date('Y-m-d', strtotime($fechaIncorrecta));
-  $receta_medica['fecha_final'] = $fechaFormateada;
-  $medicamentos = null;
-  $alimentos = null;
-  if( !empty($_POST['medicamentos']) ) { 
-    $medicamentos = array();
-    $medicamentos[0] = $_POST['medicamentos']; 
-    $numMeds = count($medicamentos);
-    for($i = 0; $i < $numMeds; $i ++)
-      $medicamentos[$i] = (int)( extraerId($medicamentos[$i]) );
-  }
-  if( !empty($_POST['alimentos']) ) {
-    $alimentos = array();
-    $alimentos[0] = $_POST['alimentos'];
-    $numAlimentos = count($alimentos);
-    for($i = 0; $i < $numAlimentos; $i ++)
-      $alimentos[$i] = extraerId($alimentos[$i]);
-  }
-  registrarReceta(1, $_POST['nombre_usuario'], $_POST['peso_inicial'],$_POST['fecha_final'], $_POST['descripcion'], $medicamentos, $alimentos);
-  sitaFueAtendida($_POST['id_cita']);
-  echo '<h1>Prescription Registered Successfully</h1>';
-}
+
 ?>
 
 <!doctype html>
@@ -108,7 +81,7 @@ if( !empty($_POST) ) {
     </div>
 
       <div class="container">
-        <form method="POST" action="registrarReceta_medica.php" class="needs-validation" novalidate>
+        <form method="POST" action="../php/generarReceta.php" class="needs-validation" novalidate>
           <div class="row g-3">
             <br>
             <h4>Pacient Information</h4>

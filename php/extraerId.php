@@ -9,6 +9,4 @@
         }
         return (int)$id;
     }
-
-    echo extraerId('1 paracetamol');
 ?>
