@@ -1,8 +1,8 @@
 <?php
 if( !empty($_POST) ) {
-  require_once '../dbConnection/Registrar/pasientes.php';
+  require_once '../dbConnection/Registrar/pacientes.php';
   $usuario = $_POST;
-  registrarPasiente($usuario);
+  registrarPaciente($usuario);
   /*
   $diaHoy = date('Y-m-d');
   $fecha_vencimiento =  ( date('Y-m-d', strtotime($diaHoy . ' + 7 days')) );
