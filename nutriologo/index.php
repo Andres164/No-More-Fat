@@ -1,16 +1,16 @@
 <?php
 session_start();
 $logInInfo = '';
-if( !empty($_POST['email']) && !empty($_POST['password']) ) {
-  require '../dbConnection/SELECT/pacientes.php';
-  $paciente = mysqli_fetch_array(selectPacientes($_POST['email']));
-  if( !empty($paciente) && $paciente['password'] == $_POST['password']) {
-    $_SESSION['credencialesDeSesion'] = $paciente;
-    header('Location: ../index.html'); // Debe redireccionar a la paguina que pidio el inicio de sesion 
+if( !empty($_POST['nombre']) && !empty($_POST['password']) ) {
+  require '../dbConnection/SELECT/nutriologos.php';
+  $nutriologo = mysqli_fetch_array(selectNutriologos($_POST['nombre']));
+  if( !empty($nutriologo) && $nutriologo['password'] == $_POST['password']) {
+    $_SESSION['credencialesDeSesionNutri'] = $nutriologo;
+    header('Location: registrarReceta_medica.php'); 
   } else
-    $logInInfo = 'email y/o contraseña incorrectos';
-} else if (isset($_POST['email'])) {
-  $logInInfo = 'Escribe tu email y contraseña';
+    $logInInfo = 'nombre y/o contraseña incorrectos';
+} else if (isset($_POST['nombre'])) {
+  $logInInfo = 'Escribe tu nombre y contraseña';
 }
 ?>
 
@@ -85,13 +85,13 @@ if( !empty($_POST['email']) && !empty($_POST['password']) ) {
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
-  <form method="POST", action="iniciarSesion.php" class="shadow bg-body" id="logInContainer">
+  <form method="POST", action="index.php" class="shadow bg-body" id="logInContainer">
     <img class="mb-4" src="#" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Inicio de sesion</h1>
     
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
-      <label for="floatingInput">Correo electronico</label>
+      <input type="text" class="form-control" id="floatingInput" name="nombre" placeholder="Nombre">
+      <label for="floatingInput">Nombre</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">

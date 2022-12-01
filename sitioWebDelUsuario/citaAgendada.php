@@ -1,3 +1,16 @@
+<?php
+session_start();
+if( isset($_SESSION['credencialesDeSesion']) ) {
+  // registrar cita
+  require_once '../dbConnection/Registrar/citas.php';
+  registrarCita(1, $_SESSION['credencialesDeSesion']['nombre_usuario']);
+  $diaHoy = date('Y-m-d');
+  $fecha_vencimiento =  ( date('Y-m-d', strtotime($diaHoy . ' + 7 days')) );
+} else {
+  header('Location: iniciarSesion.php');
+}
+?>
+
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
@@ -6,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Cover Template · Bootstrap v5.2</title>
+    <title>scheduled</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
@@ -81,7 +94,7 @@
 
   <main style="height: 70%;" class="px-3">
     <h1>Appointment scheduled.</h1>
-    <p class="lead">Nutriologist BIO.</p>
+    <?php echo '<p class="lead">Appointment scheduled with <b>{nutriologistName}</b>.<br> You have until <b>' . $fecha_vencimiento . '</b> to attend.</p>' ?>
   </main>
 
   <footer class="mt-auto text-white-50">

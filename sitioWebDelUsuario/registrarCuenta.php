@@ -1,13 +1,11 @@
 <?php
+session_start();
 if( !empty($_POST) ) {
   require_once '../dbConnection/Registrar/pacientes.php';
   $usuario = $_POST;
   registrarPaciente($usuario);
-  /*
-  $diaHoy = date('Y-m-d');
-  $fecha_vencimiento =  ( date('Y-m-d', strtotime($diaHoy . ' + 7 days')) );
-  echo '<h2>Paciente registrado, cita registrada, fecha de vencimiento: ' . $fecha_vencimiento . '</h2>';
-  */
+  $_SESSION['credencialesDeSesion'] = $usuario;
+  header('Location: ../index.html');
 }
 ?>
 

@@ -1,6 +1,7 @@
 <?php
+session_start();
 if( !empty($_POST) ) {
-  /*
+  
   require_once '../dbConnection/Registrar/recetas_medicas.php';
   require_once '../dbConnection/UPDATE/citas.php';
   require_once 'extraerId.php';
@@ -23,10 +24,9 @@ if( !empty($_POST) ) {
     for($i = 0; $i < $numAlimentos; $i ++)
     $alimentos[$i] = extraerId($alimentos[$i]);
   }
-  $nutriologo = 1;
-  registrarReceta($nutriologo, $_POST['nombre_usuario'], $_POST['peso_inicial'],$_POST['fecha_final'], $_POST['descripcion'], $medicamentos, $alimentos);
+  registrarReceta($_SESSION['credencialesDeSesionNutri']['id_nutriologo'], $_POST['nombre_usuario'], $_POST['peso_inicial'],$_POST['fecha_final'], $_POST['descripcion'], $medicamentos, $alimentos);
   sitaFueAtendida($_POST['id_cita']);
-  */
+  
 
   // Generate PDF
   require_once  realpath(dirname(__FILE__) . '/../fpdf/fpdf.php');

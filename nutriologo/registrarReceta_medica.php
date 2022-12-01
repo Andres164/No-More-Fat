@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -86,6 +82,14 @@
             <br>
             <h4>Pacient Information</h4>
             <hr class="my-4">
+            <div class="col-12">
+              <label for="id_cita" class="form-label">Enter the appointment number</label>
+              <input name="id_cita" type="text" class="form-control" id="firstName" required>
+              <div class="invalid-feedback">
+                Please provide a valid appointment number.
+              </div>
+            </div>
+            
             <div class="col-sm-6">
               <label for="firstName" class="form-label">Username</label>
               <input name="nombre_usuario" type="text" class="form-control" id="firstName" required>
@@ -103,18 +107,6 @@
             </div>
             <h4 style="margin-top: 4rem;">Prescription Information</h4>
             <hr class="my-4">
-
-            <div class="col-12">
-              <label for="cita_id" class="form-label">Select the appointment number</label>
-              <select name="id_cita" class="form-select" id="cita_id" required>
-                <option value="">Choose...</option>
-                <!-- select appointments from usuario -->
-                <option>1</option>
-              </select>
-              <div class="invalid-feedback">
-                Please provide a valid appointment number.
-              </div>
-            </div>
 
             <div class="col-12">
               <label for="username" class="form-label">Finish date</label>
