@@ -1,6 +1,6 @@
 <?php
 session_start();
-if( isset($_SESSION['credencialesDeSesion']) ) {
+if( !empty($_SESSION['credencialesDeSesion']) ) {
   // registrar cita
   require_once '../dbConnection/Registrar/citas.php';
   registrarCita(1, $_SESSION['credencialesDeSesion']['nombre_usuario']);

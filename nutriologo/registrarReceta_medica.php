@@ -1,3 +1,10 @@
+<?php
+session_start();
+if( empty($_SESSION['credencialesDeSesionNutri']) ) {
+  header('Location: index.php');
+}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -128,8 +135,15 @@
             <select name="medicamentos" class="form-select" id="medicamento">
               <option value="">Choose...</option>
               <!-- select id, medicamento from medicamentos -->
-              <option>1 Paracetamol</option>
+              <?php
+            require_once '../dbConnection/SELECT/medicamentos.php';
+            $medicamentos = selectMedicamentos();
+            while($medicamento = mysqli_fetch_array($medicamentos)) {
+              echo '<option>' . $medicamento['id_medicamento'] . ' '  . $medicamento['medicamento'] .'</option>';
+            }
+            ?>
             </select>
+            <button style="margin-top: 0.5rem;" type="button" class="btn btn-primary btn-sm">Add</button>
           </div>
 
           <div class="col-12">
@@ -137,8 +151,16 @@
             <select name="alimentos" class="form-select" id="comida">
               <option value="">Choose...</option>
               <!-- select id, nombre from alimentos -->
-              <option>1 Sandwich</option>
+              <?php
+              require_once '../dbConnection/SELECT/alimentos.php';
+              $alimentos = selectAlimentos();
+              
+              while($alimento = mysqli_fetch_array($alimentos)) {
+                echo '<option>' . $alimento['id_alimento'] . ' '  . $alimento['alimento'] .'</option>';
+              }
+              ?>
             </select>
+            <button style="margin-top: 0.5rem;" type="button" class="btn btn-primary btn-sm">Add</button>
           </div>
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Finish</button>
